@@ -17,7 +17,8 @@ export default function summaryRoute(req, res) {
     const adminCount = users.filter((x) => x.isAdmin === true).length;
     const totalMoney = users
       .filter((x) => x.isAdmin === false)
-      .reduce((p, c) => p.money + c.money, 0);
+      .map((x) => x.money)
+      .reduce((p, c) => p + c, 0);
     //return response
     return res.json({ ok: true, userCount, adminCount, totalMoney });
   } else {
